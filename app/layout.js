@@ -1,9 +1,15 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "sonner";
+import FloatingShapes from "@/components/floatingShapes";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// Metadata for SEO - used by Next.js for document head
+// title: Browser tab title
+// description: Meta description for search engines
 export const metadata = {
   title: "Photon",
   description: "AI image editor",
@@ -23,7 +29,29 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+
+          {/* Header */}
+          <Header />
+
+          {/* Main content area
+              - bg-slate-900: Dark background color
+              - min-h-screen: Minimum full viewport height
+              - text-white: White text color
+              - overflow-x-hidden: Prevents horizontal scroll */}
+          <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
+
+            {/* FloatingShapes: Animated gradient background shapes
+                - Fixed position, covers entire viewport
+                - Uses parallax effect based on scroll position
+                - pointer-events-none: Allows clicking through to content */}
+            <FloatingShapes />
+
+            {/* Toaster: Global toast notification system
+                - richColors: Enables colored toast messages
+                - Positioned at bottom-right by default */}
+            <Toaster richColors />
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>
