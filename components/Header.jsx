@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const path = usePathname();
@@ -43,7 +45,26 @@ const Header = () => {
           </div>
         )}
 
-        <div className="flex items-center gap-3 ml-10 md:ml-20">auth</div>
+        <div className="flex items-center gap-3 ml-10 md:ml-20">
+          {/* < className="relative z-40 flex justify-end gap-2 px-4 pt-28 sm:px-8"> */}
+          <Show when="signed-out">
+            <SignInButton>
+              <Button variant="glass">Sign in</Button>
+            </SignInButton>
+            <SignUpButton>
+              <Button variant="primary">Sign up</Button>
+            </SignUpButton>
+          </Show>
+          <Show when="signed-in">
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "w-8 h-8",
+                },
+              }}
+            />
+          </Show>
+        </div>
       </div>
     </header>
   );
