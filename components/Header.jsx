@@ -9,6 +9,7 @@ import { Button } from "./ui/button";
 import { useStoreUserEffect } from "@/hooks/useStoreUserEffect";
 import { BarLoader } from "react-spinners";
 import { Authenticated, Unauthenticated } from "convex/react";
+import { LayoutDashboard } from "lucide-react";
 
 const Header = () => {
   const path = usePathname();
@@ -60,10 +61,16 @@ const Header = () => {
               <Button variant="glass">Sign in</Button>
             </SignInButton>
             <SignUpButton>
-              <Button variant="primary">Sign up</Button>
+              <Button variant="primary">Get Started</Button>
             </SignUpButton>
           </Unauthenticated>
           <Authenticated>
+            <Link href="/dashboard">
+              <Button variant="glass" className="hidden sm:flex">
+                <LayoutDashboard className="h-4 w-4 text-to-r from-blue-500 to-cyan-400" />
+                <span className="hidden md:flex">Dashboard</span>
+              </Button>
+            </Link>
             <UserButton
               appearance={{
                 elements: {
