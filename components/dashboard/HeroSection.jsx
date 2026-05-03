@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useMagnet } from "@/hooks/use-magnet";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 // ─── Orbiting radial cluster ──────────────────────────────────────────────
 function HeroRadialCluster() {
@@ -204,44 +206,16 @@ export default function HeroSection() {
   return (
     <section
       style={{
-        padding: "80px 0 60px",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        padding: "0",
         position: "relative",
         zIndex: 1,
         // Ensure this sits above FloatingShapes (z-index 0) but doesn't cover it
       }}
     >
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
-        {/* Live badge */}
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            background: "rgba(99,102,241,0.12)",
-            border: "1px solid rgba(99,102,241,0.28)",
-            borderRadius: 50,
-            padding: "6px 16px",
-            marginBottom: 32,
-            fontFamily: "var(--font-mono)",
-            fontSize: 12,
-            color: "#a78bfa",
-            letterSpacing: "0.06em",
-          }}
-        >
-          <span
-            style={{
-              width: 7,
-              height: 7,
-              borderRadius: "50%",
-              background: "#22d3ee",
-              boxShadow: "0 0 8px #22d3ee",
-              display: "inline-block",
-              animation: "pulse-ring 1.8s ease infinite",
-            }}
-          />
-          PHOTON — LIVE DASHBOARD
-        </div>
-
         <div
           style={{
             display: "grid",
@@ -256,7 +230,7 @@ export default function HeroSection() {
           >
             <h1
               style={{
-                fontSize: 68,
+                fontSize: "clamp(40px, 5vw, 68px)",
                 fontWeight: 800,
                 lineHeight: 1.04,
                 letterSpacing: "-0.05em",
@@ -312,42 +286,17 @@ export default function HeroSection() {
             </div>
 
             {/* CTAs */}
-            <div style={{ display: "flex", gap: 12 }}>
-              <button
-                ref={mag.ref}
-                {...mag.handlers}
-                style={{
-                  ...mag.style,
-                  background: "linear-gradient(135deg, #6366f1, #4f46e5)",
-                  border: "none",
-                  color: "#fff",
-                  padding: "13px 28px",
-                  borderRadius: 50,
-                  fontSize: 14,
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  fontFamily: "var(--font-display)",
-                  boxShadow: "0 0 40px rgba(99,102,241,0.4)",
-                  letterSpacing: "0.01em",
-                }}
-              >
-                New project ✦
-              </button>
-              <button
-                style={{
-                  background: "transparent",
-                  border: "1px solid var(--border)",
-                  color: "var(--text-mid)",
-                  padding: "13px 24px",
-                  borderRadius: 50,
-                  fontSize: 14,
-                  cursor: "pointer",
-                  fontFamily: "var(--font-display)",
-                  transition: "all 0.2s",
-                }}
-              >
-                View reports
-              </button>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              {/* Magnet wrapper → Link → Button merged via asChild */}
+              <div ref={mag.ref} {...mag.handlers} style={mag.style}>
+                <Button variant="primary" size="xl" asChild>
+                  <Link href="/dashboard">Start Creating ✦</Link>
+                </Button>
+              </div>
+
+              <Button variant="glass" size="xl">
+                Watch Demo
+              </Button>
             </div>
           </div>
 

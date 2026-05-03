@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --accent: #6366f1;
+  --accent2: #22d3ee;
+  --accent3: #a78bfa;
+  --glow: rgba(99, 102, 241, 0.35);
+  --glass: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.07);
+  --text-dim: rgba(255, 255, 255, 0.38);
+  --text-mid: rgba(255, 255, 255, 0.62);
+  --font-display: "Syne", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  33%       { transform: translate(30px, -20px) rotate(4deg) scale(1.04); }
+  66%       { transform: translate(-20px, 15px) rotate(-3deg) scale(0.97); }
+}
+@keyframes marching {
+  to { stroke-dashoffset: -20; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(0.9); opacity: 0.6; }
+  70%  { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(0.9); opacity: 0; }
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes blink-caret {
+  50% { border-color: transparent; }
+}
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* ── Shared utility classes used across dashboard components ── */
+
+.dash-glow-text {
+  background: linear-gradient(135deg, #6366f1 0%, #a78bfa 40%, #22d3ee 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-x 5s ease infinite;
+}
+
+.dash-glass-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.dash-glass-card:hover {
+  border-color: rgba(99, 102, 241, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.dash-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 50px;
+  border: 1px solid;
+  letter-spacing: 0.04em;
+}
+
+.dash-progress-bar {
+  height: 4px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+  position: relative;
+}
+.dash-progress-fill {
+  height: 100%;
+  border-radius: 50px;
+  position: relative;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dash-progress-fill::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: rgba(255, 255, 255, 0.4);
+  filter: blur(6px);
+  border-radius: 50px;
+}
+
+.dash-activity-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+  cursor: default;
+}
+.dash-activity-row:last-child {
+  border-bottom: none;
+}
+.dash-activity-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+.dash-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.dash-revealed {
+  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dash-ticker-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+.dash-ticker-inner {
+  display: inline-block;
+  animation: ticker 30s linear infinite;
+}
