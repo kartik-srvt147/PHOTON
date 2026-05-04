@@ -8,7 +8,6 @@
 // ─────────────────────────────────────────────────────────────────────────
 
 import React from "react";
-import Ticker from "@/components/dashboard/Ticker";
 import HeroSection from "@/components/dashboard/HeroSection";
 import InteractiveStats from "@/components/dashboard/InteractiveStats";
 import FeaturesSection from "@/components/dashboard/FeaturesSection";
